@@ -157,6 +157,13 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .result-section.active {
+      border-color: var(--primary);
+      background: #ffffff;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
     }
 
     .result-empty {
@@ -170,12 +177,32 @@
       text-align: center;
       font-weight: 600;
       font-size: 1rem;
+      animation: popIn 0.25s ease-out;
     }
 
     .result-card {
       display: flex;
       flex-direction: column;
       gap: 8px;
+      animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: translateY(6px) scale(0.98);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .shortcut-hint {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 8px;
     }
 
     .result-title {
@@ -328,6 +355,7 @@
       <button class="btn btn-primary" id="btn-pick" onclick="pickActivity()">幫我選</button>
       <button class="btn btn-secondary" id="btn-reset" onclick="resetFilters()">重設篩選</button>
     </div>
+    <div class="shortcut-hint" id="ui-shortcut-hint">提示：可直接按鍵盤空白鍵 (Space) 或 Enter 抽取</div>
 
     <div class="result-section" id="result-box">
       <div class="result-empty" id="result-empty">請點選「幫我選」抽取活動</div>
@@ -476,7 +504,8 @@
         idLabel: "編號",
         needTime: "需要時間",
         location: "地點",
-        energy: "強度"
+        energy: "強度",
+        shortcutHint: "提示：可直接按鍵盤空白鍵 (Space) 或 Enter 抽取"
       },
       en: {
         title: "What to do between classes?",
@@ -505,7 +534,8 @@
         idLabel: "ID",
         needTime: "Time",
         location: "Location",
-        energy: "Energy"
+        energy: "Energy",
+        shortcutHint: "Tip: Press Space or Enter to pick an activity"
       }
     };
 
@@ -514,6 +544,7 @@
       document.getElementById('ui-title').innerText = t.title;
       document.getElementById('ui-banner').innerText = t.banner;
       document.getElementById('lang-btn').innerText = t.btnLang;
+      document.getElementById('ui-shortcut-hint').innerText = t.shortcutHint;
 
       document.getElementById('ui-label-loc').innerText = t.labelLoc;
       document.getElementById('ui-label-time').innerText = t.labelTime;
@@ -559,6 +590,11 @@
         const matchEnergy = (energy === 'all') || (act.energy === energy);
         return matchLoc && matchTime && matchEnergy;
       });
+
+      const box = document.getElementById('result-box');
+      box.classList.remove('active');
+      void box.offsetWidth; // 強制重繪以觸發動畫
+      box.classList.add('active');
 
       if (matched.length === 0) {
         currentSelectedActivity = 'NO_MATCH';
@@ -653,6 +689,17 @@
         `;
       }).join('');
     }
+
+    // 鍵盤監聽事件：空白鍵或 Enter 觸發抽籤
+    document.addEventListener('keydown', (e) => {
+      if (e.target && (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT')) {
+        return; // 若焦點在下拉選單則不攔截
+      }
+      if (e.code === 'Space' || e.code === 'Enter') {
+        e.preventDefault();
+        pickActivity();
+      }
+    });
 
     // 初始化
     updateLanguageUI();
