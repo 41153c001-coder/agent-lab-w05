@@ -1,0 +1,62 @@
+[
+  {
+    "source": "announcement.txt",
+    "destination": "publicity/announcement.txt",
+    "reason": "活動通知公告正本，歸入文宣與通知分類"
+  },
+  {
+    "source": "announcement_copy.txt",
+    "destination": "publicity/announcement_copy.txt",
+    "reason": "活動通知公告副本，內容與正本完全相同，保留副本並歸入文宣與通知分類"
+  },
+  {
+    "source": "budget_draft.txt",
+    "destination": "logistics/budget_draft.txt",
+    "reason": "紙張預算草案，歸入總務與物資分類"
+  },
+  {
+    "source": "equipment_backup.txt",
+    "destination": "logistics/equipment_backup.txt",
+    "reason": "器材清單備份，內容與正本完全相同，保留副本並歸入總務與物資分類"
+  },
+  {
+    "source": "equipment_list.txt",
+    "destination": "logistics/equipment_list.txt",
+    "reason": "器材清單正本，歸入總務與物資分類"
+  },
+  {
+    "source": "feedback_questions.txt",
+    "destination": "admin-planning/feedback_questions.txt",
+    "reason": "活動回饋調查問題，歸入行政與進度規劃分類"
+  },
+  {
+    "source": "meeting_notes.txt",
+    "destination": "admin-planning/meeting_notes.txt",
+    "reason": "社團會議記錄，歸入行政與進度規劃分類"
+  },
+  {
+    "source": "next_steps.txt",
+    "destination": "admin-planning/next_steps.txt",
+    "reason": "後續待辦事項與比對提示，歸入行政與進度規劃分類"
+  },
+  {
+    "source": "poster_text.txt",
+    "destination": "publicity/poster_text.txt",
+    "reason": "活動海報宣傳文案，歸入文宣與通知分類"
+  },
+  {
+    "source": "proposal_final.txt",
+    "destination": "proposals/proposal_final.txt",
+    "reason": "戶外企劃案第一版（非最終定案），歸入企劃與備案方案分類"
+  },
+  {
+    "source": "proposal_final2.txt",
+    "destination": "proposals/proposal_final2.txt",
+    "reason": "室內企劃案第二版（非最終定案），歸入企劃與備案方案分類"
+  },
+  {
+    "source": "rain_plan.txt",
+    "destination": "proposals/rain_plan.txt",
+    "reason": "雨天備案原則與討論，歸入企劃與備案方案分類"
+  }
+]
